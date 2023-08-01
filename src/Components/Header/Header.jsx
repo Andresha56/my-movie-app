@@ -59,7 +59,7 @@ function Header() {
   };
 
   return (
-    <AppBar sx={{ background: "#162239F2" ,position:"static"}} >
+    <AppBar sx={{ background: "rgba(18, 18, 18, 0.89)" ,position:"stickey"}} >
       <Toolbar>
         {smScreenTrue ? (
           <Grid container justifyContent="center" alignItems="center">

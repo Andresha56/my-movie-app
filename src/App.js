@@ -4,6 +4,7 @@ import Navbar from "./Components/Header/Header";
 import HomePage from "./Components/Home/HomePage";
 import RecentlyUpdated from "./Components/Recently-Updated/RecentlyUpdated";
 import TopRatedMoviesPage from "./Components/TopRatedMoviesPage/TopRatedMoviesPage";
+import Cards from "./Components/Cards/Cards";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/recenetly-release" element={<RecentlyUpdated />} />
-        <Route path="/top-rated" element={<TopRatedMoviesPage />} />
+        <Route path="/top-rated/:id" element={<TopRatedMoviesPage />} />
       </Routes>
+      <Cards/>
     </>
   );
 }
