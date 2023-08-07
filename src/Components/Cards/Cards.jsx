@@ -5,22 +5,28 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Container,Button } from "@mui/material";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
 
-function Cards() {
+
+function Cards({data}) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000);
   }, []);
+
+  const  {original_language, overview, poster_path, title, vote_average,release_date
+  }=data;
+
   return (
-    <Container>
+    <>
       {isLoading ? (
         <Box
           sx={{
             bgcolor: "#121212",
-            p: 8,
+            p:2,
             width: "100%",
             display: "flex",
             justifyContent: "center",
@@ -29,37 +35,27 @@ function Cards() {
           <Skeleton
             sx={{ bgcolor: "grey.900" }}
             variant="rectangular"
-            width={200}
-            height={118}
+            width="100%"
+            height={280}
           />
         </Box>
       ) : (
-        <Card
-          sx={{
-            maxWidth: 345,
-            minWidth: 240,
-            width: 200,
-            height: 280,
-            marginTop: 1,
-            position: "relative",
-            marginBottom: "20px",
-          }}
-        >
-          <CardActionArea
+
+          <Card
             sx={{
-              height: "100%",
-              transition: "all 0.6s ease",
-              "&:hover": {
-                transform: "scale(1.2)",
-                background: "rgba(0, 0, 0, 0.5)",
-              },
+              width:"100%",
+              height: 280,
+              marginTop: 1,
+              position: "relative",
+              marginBottom: "20px",
             }}
           >
             <CardMedia
               component="img"
               height="100%"
-              image=""
+              image={`https://image.tmdb.org/t/p/original/${poster_path}`}
               alt="green iguana"
+              
             />
             <CardContent
               sx={{
@@ -74,33 +70,35 @@ function Cards() {
                 color: "#ffffff",
                 transition: "all 0.6s ease",
                 opacity: 0,
-                backgroundColor: "rgba(0, 0, 0, 0.5) !important",
+                boxSizing:"border-box",
+                backgroundColor: "rgba(0, 0, 0, 0.8) !important",
                 "&:hover": {
                   top: 0,
                   opacity: 1,
                 },
               }}
             >
-              <Box sx={{ position: "absolute", top: "60px" }}>
+              <Box sx={{ position: "absolute", top: "20px" }}>
                 <Box sx={{ width: "75%", marginLeft: "12px" }}>
                   <Typography gutterBottom variant="h5" component="div">
-                    {""}
+                    {title}
                   </Typography>
                   <Typography variant="body2" color="ffffff">
-                    {""}
+                    {overview ? overview.slice(0, 50) + "..." : ""}
                   </Typography>
-                  <Button variant="contained" size="small" sx={{marginTop:"20px"}}>
-                  {
-                  ""
-                  }
-                  </Button>
+
+                  {vote_average.toFixed(1)} <span>| </span>
+                  {original_language} <span>|</span> {release_date}
+                  <CardActions >
+                    <Button size="small" variant="outlined" sx={{color:"#ffffff"}} >PlayNow</Button>
+                  </CardActions>
                 </Box>
               </Box>
             </CardContent>
-          </CardActionArea>
-        </Card>
+          </Card>
+
       )}
-    </Container>
+    </>
   );
 }
 
