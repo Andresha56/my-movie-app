@@ -1,16 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, Grid } from "@mui/material";
 import Cards from "../Cards/Cards";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { MovieGenersContext } from "../../App";
 
 function MoviesList({ heading, types }) {
   const [API_Response, setApiResponse] = useState([]);
   const [BaseUrl, setBaseUrl] = useState(null);
   const [handelParam,setHandelParams]=useState("")
   const {type} = useParams();
-  console.log(type)
   useEffect(() => {
     if (types === "trending") {
       setBaseUrl(
@@ -41,6 +41,8 @@ function MoviesList({ heading, types }) {
     }
 
   }, [BaseUrl,type]);
+  const geners=useContext(MovieGenersContext)
+  console.log(geners)
 
   return (
     <Container>
